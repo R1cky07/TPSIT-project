@@ -7,11 +7,11 @@ bool check(int firstChoice, int secondChoice = 0);
 
 int main()
 {
-    start();
-    cout << "Your choice: ";
+    start();                 // low duration = 2 month, medium = 6 month, long = 12 month
+    cout << "Your choice: "; 
     int choice[2];
     cin >> choice[0];
-    while(choice[0] <= 0 || choice[0] >= 7) {
+    while(choice[0] < 1 || choice[0] > 6) {
         cout << "Select a parameter between 1 and 6" << endl;
         cout << "Your choice: ";
         cin >> choice[0];
@@ -25,6 +25,29 @@ int main()
         start(choice[0]);
         cin >> choice[1];
     }
+
+    if(choice[0] == 4) {
+        cout << "How long do you want to advance in time" << endl;
+        cout << "days(1), months(2), years(3): ";
+        int timeChoice;
+        cin >> timeChoice;
+        while(timeChoice < 1 || timeChoice > 3) {
+            cout << "Invalid choice" << endl;
+            cout << "Reinsert: ";
+            cin >> timeChoice;
+        }
+        cout << "Now insert the total time: ";
+        int time;
+        cin >> time;
+		//client.setTime(time);
+    }
+
+    /*if(choice[0] == 5){
+        cout << "Your bank status is as follows: " << client.getBankStatus();
+    }
+    if(choice[0] == 6){
+        cout << client.getWallet()
+    }*/
 
     return 0;
 }
@@ -51,11 +74,11 @@ void start(int choice)
         cout << "short(1), medium(2), long(3): ";
         return;
     case 3:
-        cout << "select the margin: " << endl;
+        cout << endl << "select the margin: " << endl;
         cout << "low(1), medium(2), high(3): ";
         return;
     default:
-        cout << "Invalid choice" << endl;
+        cout << endl << "Invalid choice" << endl;
         cout << "Reinsert: ";
         cin >> choice;
         start(choice);
@@ -75,5 +98,5 @@ bool check(int firstChoice, int secondChoice)
         } else
             return true;
     }
-	return true;
+    return true;
 }
