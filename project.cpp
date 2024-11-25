@@ -8,7 +8,7 @@ bool check(int firstChoice, int secondChoice = 0);
 int main()
 {
     start();                 // low duration = 2 month, medium = 6 month, long = 12 month
-    cout << "Your choice: "; 
+    cout << "Your choice: "; //per l'investimento usare rand()%200 - 100 in modo da capire la percentuale casuale del quale aumenta
     int choice[2];
     cin >> choice[0];
     while(choice[0] < 1 || choice[0] > 6) {
