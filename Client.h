@@ -1,23 +1,17 @@
-#include <iostream>
-#include "Time.h"
-#include "Time.cpp"
-using namespace std;
 #ifndef CLIENT_H
 #define CLIENT_H
-
+#include "Month.h"
 class Client
 {
-	double depositedMoney, wallet;
-	Time month;
+    double depositedMoney, wallet;
+
 public:
-
-	Client(double M);
-	~Client();
-	void showBankStatus();
-	void showWallet();
-	void deposit(double M);
-	void withdraw(double M);
-
+    Month totalMonth;
+    Client(double M);
+    ~Client();
+    double getBankAccount();
+    double getWallet();
+    void depositOrWithdraw(double M, int choice);
 };
 
 #endif

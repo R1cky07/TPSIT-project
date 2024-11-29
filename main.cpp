@@ -1,50 +1,68 @@
-#include <iostream>
 #include <ctime>
-// #include "Client.h"
-// #include "Client.cpp"
+#include <iostream>
 using namespace std;
+#include "Client.cpp"
+#include "Client.h"
+#include "Investment.cpp"
+#include "Investment.h"
+#include "Month.cpp"
+#include "Month.h"
 
 void start(int choice = 0);
 bool check(int firstChoice, int secondChoice = 0);
-			
+
 int main()
-{			//Formatter used is clang-format
-    start(); // low duration = 2 month, medium = 6 month, long = 12 month
-    cout << "Your choice: "; 
-    int choice[2];
-    cin >> choice[0];
-    while(choice[0] < 1 || choice[0] > 7) {
-        cout << "Select a parameter between 1 and 7" << endl;
+{
+    srand(time(NULL));
+    cout << "Insert how many money you have in your wallet: ";
+    double money;
+    cin >> money;
+    Client client(money);// low duration = 2 month, medium = 6 month, long = 12 month
+    int choice[2]{ 0, 0 };
+    while(choice[0] != 7) {
+        start();
         cout << "Your choice: ";
+
         cin >> choice[0];
-    }
-    if(choice[0] == 7) {
-        return 0;
-    }
-    if(choice[0] <= 3) {
-        start(choice[0]);
-        cin >> choice[1];
-    }
-    while(check(choice[0], choice[1]) == false) {
-        cout << "Your choice is not valid" << endl;
-        start(choice[0]);
-        cin >> choice[1];
-    }
+        while(choice[0] < 1 || choice[0] > 7) {
+            cout << "Select a parameter between 1 and 7" << endl;
+            cout << "Your choice: ";
+            cin >> choice[0];
+        }
+        system("cls");
+        if(choice[0] <= 3) {
+            start(choice[0]);
+            cin >> choice[1];
+        }
 
-    if(choice[0] == 4) {
-        cout << "How long do you want to advance in time (the time is in month): ";
-        int time;
-        cin >> time;
-        // client.setTime(time);
+        while(check(choice[0], choice[1]) == false) {
+            cout << "Your choice is not valid" << endl;
+            start(choice[0]);
+            cin >> choice[1];
+        }
+        switch(choice[0]) {
+        case 1:
+            cout << "Insert how much: ";
+            cin >> money;
+            client.depositOrWithdraw(money, choice[1]);
+			break;
+		case 2:
+			cout << "Insert how much: "; cin >> money;
+			
+			break;
+        case 4:
+            cout << "How long do you want to advance in time (the time is in month): ";
+            int time;
+            cin >> time;
+            client.totalMonth.increaseTime(time);
+            break;
+        case 5:
+            cout << "Your bank account is as follows " << client.getBankAccount() << endl << endl;
+            break;
+        case 6:
+            cout << "Your wallet is as follows " << client.getWallet() << endl << endl;
+        }
     }
-
-    /*if(choice[0] == 5){
-        cout << "Your bank status is as follows: " << client.getBankStatus();
-    }
-    if(choice[0] == 6){
-        cout << client.getWallet()
-    }*/
-
     return 0;
 }
 
@@ -74,13 +92,8 @@ void start(int choice)
         cout << endl << "select the margin: " << endl;
         cout << "low(1), medium(2), high(3): ";
         return;
-    default:
-        cout << endl << "Invalid choice" << endl;
-        cout << "Reinsert: ";
-        cin >> choice;
-        start(choice);
     }
-};
+}
 
 bool check(int firstChoice, int secondChoice)
 {
@@ -96,4 +109,4 @@ bool check(int firstChoice, int secondChoice)
             return true;
     }
     return true;
-}
+};

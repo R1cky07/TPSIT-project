@@ -2,35 +2,36 @@
 
 Client::Client(double M)
 {
-	wallet = M;
+    wallet = M;
+    depositedMoney = 0;
 };
 
-Client::~Client()
+Client::~Client(){};
+
+double Client::getBankAccount() { return depositedMoney; };
+
+double Client::getWallet() { return wallet; };
+
+void Client::depositOrWithdraw(double M, int choice)
 {
-};
-
-void Client::showBankStatus(){
-	cout << depositedMoney << endl;
-};
-
-void Client::showWallet(){
-	cout << wallet << endl;
-};
-
-void Client::deposit(double M){
-	while(M > wallet){
-		cout << "You haven't " << M << " money in your wallet" << endl;
-		cout << "Please reinsert how much to deposit: "; cin >> M;
-	}
-	wallet -= M;
-	depositedMoney += M;
-};
-
-void Client::withdraw(double M){
-	while(M > depositedMoney){
-		cout << "You haven't " << M << " money in your bank account" << endl;
-		cout << "Please reinsert how much to withdraw: "; cin >> M;
-	}
-	depositedMoney -= M;
-	wallet += M;
+    if(choice == 1) {
+        while(M > wallet) {
+            cout << "You haven't " << M << " money in your wallet" << endl;
+            cout << "Please reinsert how much to deposit: ";
+            cin >> M;
+        }
+        wallet -= M;
+        depositedMoney += M;
+    } else {
+		if(depositedMoney < 0){
+			cout << "You can't withdraw, your bank account is negative" << endl << endl;
+		}
+        while(M > depositedMoney) {
+            cout << "You haven't " << M << " money in your bank account" << endl;
+            cout << "Please reinsert how much to withdraw: ";
+            cin >> M;
+        }
+        depositedMoney -= M;
+        wallet += M;
+    }
 };
