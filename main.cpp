@@ -17,7 +17,12 @@ int main()
     cout << "Insert how many money you have in your wallet: ";
     double money;
     cin >> money;
-    Client client(money);// low duration = 2 month, medium = 6 month, long = 12 month
+    while(money <= 0) {
+        cout << "I don't think you have " << money << " money in your wallet" << endl;
+        cout << "Reinsert: ";
+        cin >> money;
+    }
+    Client client(money);
     int choice[2]{ 0, 0 };
     while(choice[0] != 7) {
         start();
@@ -29,7 +34,6 @@ int main()
             cout << "Your choice: ";
             cin >> choice[0];
         }
-        system("cls");
         if(choice[0] <= 3) {
             start(choice[0]);
             cin >> choice[1];
@@ -45,16 +49,19 @@ int main()
             cout << "Insert how much: ";
             cin >> money;
             client.depositOrWithdraw(money, choice[1]);
-			break;
-		case 2:
-			cout << "Insert how much: "; cin >> money;
-			
-			break;
+            break;
+        case 2:
+        case 3:
+            cout << "Insert how much: ";
+            cin >> money;
+            client.investMoney(money, choice[0], choice[1]);
+            break;
         case 4:
             cout << "How long do you want to advance in time (the time is in month): ";
             int time;
             cin >> time;
-            client.totalMonth.increaseTime(time);
+            client.totalMonth.increaseTime(time, client);
+            client.totalMonth.updateTime(time);
             break;
         case 5:
             cout << "Your bank account is as follows " << client.getBankAccount() << endl << endl;
