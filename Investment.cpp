@@ -5,7 +5,7 @@ Investment::Investment()
     money = 0;
     risk = 0;
     time = 0;
-}
+};
 
 Investment::~Investment(){};
 
@@ -41,11 +41,12 @@ void Investment::setAll(double M, int firstChoice, int secondChoice)
 
 double Investment::UpdateInvestment(int tdif)
 {
-    if(time == 0) {
+    if(risk != 0) {
+        double maxRisk{ (risk * money) / 100 };
+        money = (rand() % 2 + 1 == 1) ? static_cast<double>(money -= rand() % static_cast<int>(maxRisk))
+                                      : static_cast<double>(money += rand() % static_cast<int>(maxRisk));
         return money;
     }
-    double moneyRisk{ 0 };
-    moneyRisk = (money * risk) / 100;
     if(time < tdif) {
         tdif -= time;
         time = 0;
@@ -54,15 +55,10 @@ double Investment::UpdateInvestment(int tdif)
     }
     for(int i{ 0 }; i < tdif; i++) {
         int percent{ rand() % 200 - 100 };
-        double moneyAfterMonth;
-        moneyAfterMonth = (percent >= 0) ? money - (money * percent * -1) / 100 : money + (money * percent) / 100;
-
-        if(moneyRisk != 0 && moneyRisk <= moneyAfterMonth) {
-            money = 0;
-            time = 0;
-            risk = 0;
-        } else
-            money = moneyAfterMonth;
+        money = (percent >= 0) ? money - (money * percent * -1) / 100 : money + (money * percent) / 100;
     }
-    return money;
+    if(time == 0) {
+        return money;
+    }
+    return 0;
 };

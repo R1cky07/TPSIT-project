@@ -17,6 +17,7 @@ int main()
     cout << "Insert how many money you have in your wallet: ";
     double money;
     cin >> money;
+
     while(money <= 0) {
         cout << "I don't think you have " << money << " money in your wallet" << endl;
         cout << "Reinsert: ";
@@ -24,16 +25,20 @@ int main()
     }
     Client client(money);
     int choice[2]{ 0, 0 };
+
     while(choice[0] != 7) {
         start();
         cout << "Your choice: ";
-
         cin >> choice[0];
+
         while(choice[0] < 1 || choice[0] > 7) {
             cout << "Select a parameter between 1 and 7" << endl;
             cout << "Your choice: ";
             cin >> choice[0];
         }
+        cout << "\033[2J";
+        cout << "\033[H";
+
         if(choice[0] <= 3) {
             start(choice[0]);
             cin >> choice[1];
@@ -44,6 +49,7 @@ int main()
             start(choice[0]);
             cin >> choice[1];
         }
+
         switch(choice[0]) {
         case 1:
             cout << "Insert how much: ";
@@ -55,6 +61,7 @@ int main()
             cout << "Insert how much: ";
             cin >> money;
             client.investMoney(money, choice[0], choice[1]);
+            cout << "The next months you will see the results" << endl << endl;
             break;
         case 4:
             cout << "How long do you want to advance in time (the time is in month): ";
@@ -70,6 +77,7 @@ int main()
             cout << "Your wallet is as follows " << client.getWallet() << endl << endl;
         }
     }
+
     return 0;
 }
 

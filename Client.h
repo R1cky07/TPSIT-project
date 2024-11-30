@@ -2,6 +2,7 @@
 #define CLIENT_H
 #include "Investment.h"
 #include "Month.h"
+
 class Client
 {
     double depositedMoney, wallet;
@@ -10,12 +11,12 @@ class Client
 
 public:
     Month totalMonth;
-    Client(double M);
+    explicit Client(double M);
     ~Client();
-    double getBankAccount();
-    double getWallet();
-    void depositOrWithdraw(double M, int choice);
-    void investMoney(double M, int firstChoice, int secondChoice);
+    const double getBankAccount() const;
+    const double getWallet() const;
+    void depositOrWithdraw(double M, const int& choice);
+    void investMoney(double M, const int& firstChoice, const int& secondChoice);
     void addMoneyMonth();
 };
 

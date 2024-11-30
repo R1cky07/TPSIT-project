@@ -8,11 +8,11 @@ Client::Client(double M)
 
 Client::~Client(){};
 
-double Client::getBankAccount() { return depositedMoney; };
+const double Client::getBankAccount() const { return depositedMoney; };
 
-double Client::getWallet() { return wallet; };
+const double Client::getWallet() const { return wallet; };
 
-void Client::depositOrWithdraw(double M, int choice)
+void Client::depositOrWithdraw(double M, const int& choice)
 {
     if(choice == 1) {
         while(M > wallet) {
@@ -20,8 +20,8 @@ void Client::depositOrWithdraw(double M, int choice)
             cout << "Please reinsert how much to deposit: ";
             cin >> M;
         }
-        wallet -= static_cast<double>(M);
-        depositedMoney += static_cast<double>(M);
+        wallet = static_cast<double>(wallet - M);
+        depositedMoney = static_cast<double>(depositedMoney + M);
     } else {
         if(depositedMoney <= 0) {
             cout << "You can't withdraw, your bank account is negative or equal to 0" << endl << endl;
@@ -32,11 +32,12 @@ void Client::depositOrWithdraw(double M, int choice)
             cout << "Please reinsert how much to withdraw: ";
             cin >> M;
         }
-        depositedMoney -= M;
-        wallet += M;
+        depositedMoney = static_cast<double>(depositedMoney - M);
+        wallet = static_cast<double>(wallet + M);
     }
 };
-void Client::investMoney(double M, int firstChoice, int secondChoice)
+
+void Client::investMoney(double M, const int& firstChoice, const int& secondChoice)
 {
     if(depositedMoney < 0) {
         cout << "You can't invest, your bank account is negative" << endl;
@@ -48,4 +49,4 @@ void Client::investMoney(double M, int firstChoice, int secondChoice)
     invested.setAll(M, firstChoice, secondChoice);
 };
 
-void Client::addMoneyMonth() { wallet += totalMonth.timeDif * 100; }
+void Client::addMoneyMonth() { wallet += totalMonth.timeDif * 100; };

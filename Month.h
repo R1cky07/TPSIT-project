@@ -18,7 +18,6 @@ public:
     Month();
     ~Month();
     void increaseTime(int n, Client& client);
-    int getTime();
     void updateTime(int T);
 };
 
