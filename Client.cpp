@@ -1,5 +1,8 @@
 #include "Client.h"
 
+#include <iostream>
+using namespace std;
+
 Client::Client(double M)
 {
     wallet = M;

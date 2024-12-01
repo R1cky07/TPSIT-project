@@ -18,7 +18,7 @@ int main()
     double money;
     cin >> money;
 
-    while(money <= 0) {
+    while(money < 0) {
         cout << "I don't think you have " << money << " money in your wallet" << endl;
         cout << "Reinsert: ";
         cin >> money;
@@ -34,10 +34,11 @@ int main()
         while(choice[0] < 1 || choice[0] > 7) {
             cout << "Select a parameter between 1 and 7" << endl;
             cout << "Your choice: ";
+
             cin >> choice[0];
         }
-        cout << "\033[2J";
-        cout << "\033[H";
+        //cout << "\033[2J";
+        //cout << "\033[H";
 
         if(choice[0] <= 3) {
             start(choice[0]);
@@ -61,7 +62,7 @@ int main()
             cout << "Insert how much: ";
             cin >> money;
             client.investMoney(money, choice[0], choice[1]);
-            cout << "The next months you will see the results" << endl << endl;
+            cout << "The next months you will see the results" << endl;
             break;
         case 4:
             cout << "How long do you want to advance in time (the time is in month): ";
@@ -71,10 +72,10 @@ int main()
             client.totalMonth.updateTime(time);
             break;
         case 5:
-            cout << "Your bank account is as follows " << client.getBankAccount() << endl << endl;
+            cout << "Your bank account is as follows " << client.getBankAccount() << endl;
             break;
         case 6:
-            cout << "Your wallet is as follows " << client.getWallet() << endl << endl;
+            cout << "Your wallet is as follows " << client.getWallet() << endl;
         }
     }
 
@@ -84,7 +85,7 @@ int main()
 void start(int choice)
 {
     if(choice == 0) {
-        cout << "What do you want to do? " << endl << endl;
+        cout << endl << "What do you want to do? " << endl << endl;
         cout << "1 - Deposit or prelevate money" << endl;
         cout << "2 - Invest money with different durations" << endl;
         cout << "3 - Invest money with different margins of risk or profit" << endl;

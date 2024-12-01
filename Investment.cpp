@@ -1,4 +1,7 @@
 #include "Investment.h"
+#include <ctime>
+#include <iostream>
+using namespace std;
 
 Investment::Investment()
 {
@@ -45,10 +48,14 @@ double Investment::UpdateInvestment(int tdif)
         double maxRisk{ (risk * money) / 100 };
         money = (rand() % 2 + 1 == 1) ? static_cast<double>(money -= rand() % static_cast<int>(maxRisk))
                                       : static_cast<double>(money += rand() % static_cast<int>(maxRisk));
-        return money;
+        risk = 0;
+		return money;
     }
+	if(time == 0){
+		return 0;
+	}
     if(time < tdif) {
-        tdif -= time;
+        tdif = time;
         time = 0;
     } else {
         time -= tdif;
