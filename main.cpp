@@ -102,11 +102,11 @@ void start(int choice)
         return;
     case 2:
         cout << endl << "select the duration: " << endl;
-        cout << "short - 2 month(1), medium - 6 month(2), long - 12 month(3): ";
+        cout << "short, 2 months(1) - medium, 6 months(2) - long, 12 months(3): ";
         return;
     case 3:
         cout << endl << "select the margin: " << endl;
-        cout << "low(1), medium(2), high(3): ";
+        cout << "low, 20%(1) - medium, 50%(2) - high, 90%(3): ";
         return;
     }
 }

@@ -39,11 +39,17 @@ void Client::depositOrWithdraw(double M, const int& choice)
 
 void Client::investMoney(double M, const int& firstChoice, const int& secondChoice)
 {
-    if(depositedMoney < 0) {
-        cout << "You can't invest, your bank account is negative" << endl;
+    if(depositedMoney <= 0) {
+        cout << "You can't invest, your bank account is negative or equal to 0" << endl;
         depositOrWithdraw(M, 1);
         cout << M << " money have been deposited in your bank account" << endl << endl;
         return;
+    }
+
+    while(M > depositedMoney) {
+        cout << "You haven't " << M << " money in your bank account" << endl;
+        cout << "Reinsert: ";
+        cin >> M;
     }
     depositedMoney -= M;
     invested.setAll(M, firstChoice, secondChoice);
