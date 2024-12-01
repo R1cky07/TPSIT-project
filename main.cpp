@@ -116,13 +116,11 @@ bool check(int firstChoice, int secondChoice)
     if(firstChoice == 1) {
         if(secondChoice < 1 || secondChoice > 2) {
             return false;
-        } else
-            return true;
+        }
     } else if(firstChoice == 2 || firstChoice == 3) {
         if(secondChoice < 1 || secondChoice > 3) {
             return false;
-        } else
-            return true;
+        }
     }
     return true;
 };
