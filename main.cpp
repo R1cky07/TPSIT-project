@@ -37,8 +37,8 @@ int main()
 
             cin >> choice[0];
         }
-        //cout << "\033[2J";
-        //cout << "\033[H";
+        // cout << "\033[2J";
+        // cout << "\033[H";
 
         if(choice[0] <= 3) {
             start(choice[0]);
